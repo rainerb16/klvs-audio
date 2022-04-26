@@ -1,0 +1,43 @@
+.mastering-content-container {
+  margin: 1rem;
+
+  .mastering-title {
+    text-align: center;
+    font-size: 24px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    text-shadow: 1px 4px rgb(83, 22, 22);
+  }
+
+  .mastering-content {
+    margin-top: 3rem;
+    width: 80%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    img {
+      width: 100%;
+      margin-left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .mastering-title {
+      font-size: 42px;
+    }
+
+    .mastering-content {
+      margin-top: 3rem;
+      width: 75%;
+  
+      img {
+        margin-left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 3rem;
+      }
+    }
+  }
+}

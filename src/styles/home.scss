@@ -1,7 +1,25 @@
+.home-content {
+  margin-top: 3rem;
+  text-align: center;
+
+  .home-title {
+    font-size: 42px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    text-shadow: 1px 4px rgb(83, 22, 22);
+  }
+}
+
+.home-container {
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 .bg-img {
-    width: 75%;
-    margin-top: 1rem;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    object-fit: cover;
+  width: 90%;
+  margin-top: 1rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }

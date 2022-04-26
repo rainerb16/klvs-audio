@@ -34,7 +34,7 @@ const Post = () => {
             <div className="blog-card" key={index}>
               <Link to={"/post/" + post.slug.current} key={post.slug.current}>
                 <span>
-                  <img src={post.mainImage.asset.url} alt={post.mainImage.alt} />
+                  <img src={post.mainImage.asset.url} alt={post.mainImage.title} />
                   <h3 className="blog-title">{post.title}</h3>
                 </span>
               </Link>
