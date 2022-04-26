@@ -1,8 +1,7 @@
 {
   "root": true,
   "project": {
-    "name": "klvs audio studio",
-    "basePath": "/studio"
+    "name": "klvs audio studio"
   },
   "api": {
     "projectId": "6v3w42bf",
