@@ -25,11 +25,13 @@ const Home = () => {
     <>
       <div className="home-content">
         <h2 className="home-title">{homeContent.title}</h2>
-        <BlockContent
-            blocks={homeContent.body}
-            projectId="6v3w42bf"
-            dataset="production"
+        <div className="home-body">
+          <BlockContent
+              blocks={homeContent.body}
+              projectId="6v3w42bf"
+              dataset="production"
           />
+        </div>
       </div>
       <div className="home-container">
           <img src={Cover} className="bg-img" alt="background img" />
