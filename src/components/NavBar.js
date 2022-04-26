@@ -13,7 +13,7 @@ const NavBar = () => {
         </NavLink>
           <nav className="nav-bar">
             <NavLink to="/mastering" className="nav-link">
-              Mastering
+              Mixing/Mastering
             </NavLink>
             <NavLink to="/work" className="nav-link">
               Work
