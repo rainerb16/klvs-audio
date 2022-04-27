@@ -3,13 +3,13 @@ import sanityClient from "../client.js";
 import BlockContent from "@sanity/block-content-to-react";
 import "../styles/mastering.scss";
 
-const Mastering = () => {
-  const [masteringContent, setMasteringContent] = useState(null);
+const Pricing = () => {
+  const [pricingContent, setPricingContent] = useState(null);
 
   useEffect(() => {
     sanityClient
       .fetch(
-        `*[_type == "mastering"] {
+        `*[_type == "pricing"] {
       title,
       mainImage {
         asset-> {
@@ -21,23 +21,23 @@ const Mastering = () => {
      body
     }`
       )
-      .then((data) => setMasteringContent(data[0]))
+      .then((data) => setPricingContent(data[0]))
       .catch(console.error);
   }, []);
 
-  if (!masteringContent) return null;
+  if (!pricingContent) return null;
 
   return (
     <div className="mastering-content-container">
-      <h1 className="mastering-title">{masteringContent.title}</h1>
+      <h1 className="mastering-title">{pricingContent.title}</h1>
       <div className="mastering-content">
         <img
-          src={masteringContent.mainImage.asset.url}
-          alt={masteringContent.title}
+          src={pricingContent.mainImage.asset.url}
+          alt={pricingContent.title}
           className="single-post-image"
         />
         <BlockContent
-          blocks={masteringContent.body}
+          blocks={pricingContent.body}
           projectId="6v3w42bf"
           dataset="production"
         />
@@ -46,4 +46,4 @@ const Mastering = () => {
   );
 };
 
-export default Mastering;
+export default Pricing;

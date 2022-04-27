@@ -3,13 +3,13 @@ import sanityClient from "../client.js";
 import BlockContent from "@sanity/block-content-to-react";
 import "../styles/mastering.scss";
 
-const Mastering = () => {
-  const [masteringContent, setMasteringContent] = useState(null);
+const Mixing = () => {
+  const [mixingContent, setMixingContent] = useState(null);
 
   useEffect(() => {
     sanityClient
       .fetch(
-        `*[_type == "mastering"] {
+        `*[_type == "mixing"] {
       title,
       mainImage {
         asset-> {
@@ -21,23 +21,23 @@ const Mastering = () => {
      body
     }`
       )
-      .then((data) => setMasteringContent(data[0]))
+      .then((data) => setMixingContent(data[0]))
       .catch(console.error);
   }, []);
 
-  if (!masteringContent) return null;
+  if (!mixingContent) return null;
 
   return (
     <div className="mastering-content-container">
-      <h1 className="mastering-title">{masteringContent.title}</h1>
+      <h1 className="mastering-title">{mixingContent.title}</h1>
       <div className="mastering-content">
         <img
-          src={masteringContent.mainImage.asset.url}
-          alt={masteringContent.title}
+          src={mixingContent.mainImage.asset.url}
+          alt={mixingContent.title}
           className="single-post-image"
         />
         <BlockContent
-          blocks={masteringContent.body}
+          blocks={mixingContent.body}
           projectId="6v3w42bf"
           dataset="production"
         />
@@ -46,4 +46,4 @@ const Mastering = () => {
   );
 };
 
-export default Mastering;
+export default Mixing;
