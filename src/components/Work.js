@@ -1,7 +1,5 @@
 import { React, useEffect, useState } from "react";
 import sanityClient from "../client.js";
-import Refractor from 'react-refractor'
-import js from 'refractor/lang/javascript'
 import "../styles/work.scss";
 
 const Work = () => {
