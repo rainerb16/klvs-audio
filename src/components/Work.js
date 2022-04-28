@@ -1,5 +1,7 @@
 import { React, useEffect, useState } from "react";
 import sanityClient from "../client.js";
+import Refractor from 'react-refractor'
+import js from 'refractor/lang/javascript'
 import "../styles/work.scss";
 
 const Work = () => {
@@ -18,8 +20,8 @@ const Work = () => {
       title,
       description,
       workType,
-      link,
-      tags
+      tags,
+      code,
     }`
       )
       .then((data) => setWorkData(data))
@@ -36,36 +38,17 @@ const Work = () => {
           workData.map((workItem, index) => {
             return (
               <div className="work-item-card" key={index}>
-                <a
-                  href={workItem.link}
-                  alt={workItem.title}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h3 className="work-item-title">{workItem.title}</h3>
-                </a>
+                <h3 className="work-item-title">{workItem.title}</h3>
                 <div className="work-item-content">
                   <span>
                     <p className="work-item-type">Type: {workItem.workType}</p>
                   </span>
-                  <a href={workItem.link}
-                     alt={workItem.title}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                  >
-                    <img src={workItem.image.asset.url} alt={workItem.title} />
-                  </a>
+                  <img src={workItem.image.asset.url} alt={workItem.title} />
                   <p className="work-item-description">
                     {workItem.description}
                   </p>
-                  <a
-                    href={workItem.link}
-                    alt={workItem.title}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <p>Listen 🔊 </p>
-                  </a>
+                  <p>Listen 🔊 </p>
+                  {workItem && workItem.code ? (<div dangerouslySetInnerHTML={{ __html: workItem.code.code }} />) : null}
                 </div>
               </div>
             );

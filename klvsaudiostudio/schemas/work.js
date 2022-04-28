@@ -34,15 +34,19 @@ export default {
             title: "Personal"
           },
           {
-            value: "other", 
-            title: "Other"
+            value: "mixing", 
+            title: "Mixing"
           }
         ]
       }
     },
     {
-      name: "link",
-      type: "url",
+      title: 'URL',
+      name: 'href',
+      type: 'url',
+      validation: Rule => Rule.uri({
+        scheme: ['http', 'https', 'mailto', 'tel']
+      })
     },
     {
       name: "tags",
@@ -55,6 +59,21 @@ export default {
       options: {
         layout: "tags"
       }
-    }
+    },
+    {
+      name: 'code',
+      title: 'Code Embed',
+      type: 'code',
+      options: {
+        theme: 'solarized_dark',
+        language: 'js',
+        languageAlternatives: [
+          {title: 'Javascript', value: 'js'},
+          {title: 'HTML', value: 'html'},
+          {title: 'CSS', value: 'css'},
+          {title: 'SASS', value: 'sass'},
+        ]
+      }
+    },
   ],
 };

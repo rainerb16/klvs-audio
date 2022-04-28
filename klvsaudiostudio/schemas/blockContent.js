@@ -54,6 +54,25 @@ export default {
               },
             ],
           },
+          {
+            type: "image",
+            options: { hotspot: true }
+          },
+          {
+            name: 'code',
+            title: 'Code Embed',
+            type: 'code',
+            options: {
+              theme: 'solarized_dark',
+              language: 'js',
+              languageAlternatives: [
+                {title: 'Javascript', value: 'js'},
+                {title: 'HTML', value: 'html'},
+                {title: 'CSS', value: 'css'},
+                {title: 'SASS', value: 'sass'},
+              ]
+            }
+          },
         ],
       },
     },
