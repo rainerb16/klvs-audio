@@ -8,10 +8,7 @@
 
     .title {
       font-size: 24px;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #fff;
-      text-shadow: 1px 4px rgb(83, 22, 22);
+      font-family: 'Space Mono', monospace;
     }
 
     .sub-title {
@@ -28,8 +25,9 @@
     justify-items: center;
 
     .blog-card {
-      margin: 7px;
+      margin: 30px;
       border: 1px solid #000;
+      box-shadow: 20px 10px #000;
       padding: 7px;
 
       > a {
@@ -52,10 +50,7 @@
     .blog-header {
       .title {
         font-size: 42px;
-        -webkit-text-fill-color: transparent;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: #fff;
-        text-shadow: 1px 4px rgb(83, 22, 22);
+        font-family: 'Space Mono', monospace;
       }
   
       .sub-title {

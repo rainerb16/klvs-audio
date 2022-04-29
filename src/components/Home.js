@@ -25,6 +25,7 @@ const Home = () => {
     <>
       <div className="home-content">
         <h2 className="home-title">{homeContent.title}</h2>
+        <h4 className="home-subtitle">We specialize in electronic, techno, and house music</h4>
         <div className="home-body">
           <BlockContent
               blocks={homeContent.body}

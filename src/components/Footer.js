@@ -9,7 +9,7 @@ const Footer = () => {
         <SocialIcon
           url="https://www.facebook.com/klvsaudio"
           network="facebook"
-          bgColor="#2B2B2B"
+          bgColor="#000"
           className="social-item"
           target="_blank"
           style={{ height: 35, width: 35 }}
@@ -17,7 +17,7 @@ const Footer = () => {
         <SocialIcon
           url="https://www.instagram.com/klvs.audio"
           network="instagram"
-          bgColor="#2B2B2B"
+          bgColor="#000"
           className="social-item"
           target="_blank"
           style={{ height: 35, width: 35 }}
@@ -25,14 +25,14 @@ const Footer = () => {
         <SocialIcon
           url="https://soundcloud.com/klvsmastering"
           network="soundcloud"
-          bgColor="#2B2B2B"
+          bgColor="#000"
           className="social-item"
           target="_blank"
           style={{ height: 35, width: 35 }}
         />
         <SocialIcon
           url="mailto:info@klvsaudio.co"
-          bgColor="#2B2B2B"
+          bgColor="#000"
           className="social-item"
           target="_blank"
           style={{ height: 35, width: 35 }}

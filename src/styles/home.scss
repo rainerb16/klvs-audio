@@ -4,14 +4,22 @@
 
   .home-title {
     font-size: 36px;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #fff;
-    text-shadow: 1px 4px rgb(83, 22, 22);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    // -webkit-text-fill-color: transparent;
+    // -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color: #fff;
+    // text-shadow: 1px 4px rgb(83, 22, 22);
 
     @media only screen and (min-width: 1200px) {
       font-size: 42px;
     }
+  }
+
+  .home-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-style: oblique;
   }
 
   .home-body {
@@ -32,4 +40,9 @@
   margin-top: 1rem;
   margin-left: 50%;
   transform: translateX(-50%);
+  box-shadow: 15px 10px #000;
+
+  @media only screen and (min-width: 768px) {
+    box-shadow: 20px 10px #000;
+  }
 }
