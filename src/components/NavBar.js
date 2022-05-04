@@ -116,7 +116,7 @@ const NavBar = () => {
                         Prepare Your Music{" "}
                       </NavLink>{" "}
                     </li>
-                    <li>
+                    {/* <li>
                       <NavLink
                         onClick={toggleClass}
                         activeClassName="is-active"
@@ -125,7 +125,7 @@ const NavBar = () => {
                         {" "}
                         Pricing{" "}
                       </NavLink>{" "}
-                    </li>
+                    </li> */}
                   </ul>
                 </li>
                 <li className="menu-item ">
