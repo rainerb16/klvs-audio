@@ -15,7 +15,7 @@ const Footer = () => {
           style={{ height: 35, width: 35 }}
         />
         <SocialIcon
-          url="https://www.instagram.com/klvs.audio"
+          url="https://www.instagram.com/kloves-techno"
           network="instagram"
           bgColor="#000"
           className="social-item"
