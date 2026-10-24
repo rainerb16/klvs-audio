@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Rainr Audio website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Static site for Rainr Audio (formerly KLVS Audio Group): audio plugins and Max for Live devices for Ableton Live.
+Built with [Astro](https://astro.build), hosted on Netlify.
 
-## Available Scripts
+## Run it
 
-In the project directory, you can run:
+Needs Node 24 (`nvm use` picks it up from `.nvmrc`).
 
-### `npm start`
+```sh
+npm install
+npm run dev       # local dev server, shows drafts
+npm run build     # production build into dist/
+npm run preview   # serve the production build
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Posting
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Everything you change regularly is a Markdown file. Commit and push, and Netlify rebuilds the site.
 
-### `npm test`
+**Lab notes** live in `src/content/notes/`, one file per post. The file name becomes the URL (`/notes/<file-name>/`).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```markdown
+---
+title: Null-testing a saturator
+summary: Flip the phase, then listen to what's left over.
+tag: Mixing
+date: 2026-11-12
+draft: false      # true = hidden on the live site, still visible in npm run dev
+upcoming: false   # true = listed as "Soon" with no page yet
+---
 
-### `npm run build`
+The post itself, in Markdown.
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**In the lab cards** live in `src/content/lab/`, one file per plugin or Max for Live device.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```markdown
+---
+name: Saturator
+type: plugin              # plugin | device
+formats: VST3 / AU
+status: testing           # plugin: prototype, build, testing, beta, release
+                          # device: idea, build, testing, beta, release
+blurb: A mix-bus saturator for warmth without mud.
+order: 1
+---
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Change `status` to move the progress bar. A new product is a new file.
 
-### `npm run eject`
+## Where things are
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| What | Where |
+| --- | --- |
+| Name, email, social links | `src/config.ts` |
+| Colours and type | `src/styles/global.css` |
+| Logo (outlined SVG) | `src/components/Logo.astro`, files in `public/brand/` |
+| Favicon, share image | `public/favicon.svg`, `public/og.png` |
+| Hero 3D spectrum | `src/scripts/waterfall.ts` |
+| Scroll and tilt motion | `src/scripts/motion.ts` |
+| Waitlist (Netlify Forms) | `src/components/WaitlistForm.astro` |
+| Redirects from the old site, headers | `netlify.toml` |

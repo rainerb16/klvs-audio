@@ -1,0 +1,34 @@
+---
+// Netlify Forms: Netlify finds this form in the built HTML and stores submissions under Forms.
+// The hidden bot-field is a honeypot; submissions that fill it are dropped as spam.
+---
+<section class="waitlist" id="waitlist">
+  <div class="wrap">
+    <div data-reveal>
+      <h2>Be first in line.</h2>
+      <p>Get the free Max for Live device when it's ready, and first access to every plugin. A few emails a year. No spam.</p>
+    </div>
+    <div data-reveal>
+      <form class="form" name="waitlist" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="waitlist" />
+        <p class="sr-only"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <label for="wl-email" class="sr-only">Email address</label>
+        <input id="wl-email" name="email" type="email" placeholder="you@studio.com" autocomplete="email" required />
+        <button class="btn btn-primary" type="submit">Join waitlist</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .waitlist { background: var(--rack); border-top: 1px solid var(--line); box-shadow: inset 0 2px 0 var(--red); }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; padding-block: clamp(48px, 7vw, 88px); }
+  @media (max-width: 860px) { .wrap { grid-template-columns: minmax(0, 1fr); } }
+  p { color: var(--muted); margin-top: 12px; }
+  .form { display: flex; background: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 6px; }
+  .form p { margin: 0; }
+  input[type="email"] { flex: 1; min-width: 0; background: transparent; border: 0; color: var(--fg); font: inherit; padding: 10px 12px; }
+  input::placeholder { color: #77767c; }
+  input:focus { outline: none; }
+  .form:focus-within { outline: 2px solid var(--silver); outline-offset: 2px; }
+</style>

@@ -1,0 +1,49 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Old KLVS Audio service pages: send visitors and search engines to the new site.
+[[redirects]]
+  from = "/mixing"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/mastering"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/prepare-your-music"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/pricing"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/work"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/post"
+  to = "/notes/"
+  status = 301
+[[redirects]]
+  from = "/post/*"
+  to = "/notes/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,21 @@
+---
+import Base from "../../layouts/Base.astro";
+import NoteList from "../../components/NoteList.astro";
+import WaitlistForm from "../../components/WaitlistForm.astro";
+import { listNotes } from "../../notes";
+
+const notes = await listNotes();
+---
+<Base title="Lab notes" description="Short write-ups on building audio plugins and Max for Live devices.">
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Lab notes</span>
+        <h1>Notes from the bench.</h1>
+        <p class="muted">Short write-ups on building plugins and Max for Live devices: DSP, mixing, and what I learn along the way.</p>
+      </div>
+      <NoteList notes={notes} />
+    </div>
+  </section>
+  <WaitlistForm />
+</Base>

@@ -1,0 +1,35 @@
+---
+import Logo from "./Logo.astro";
+---
+<header class="site">
+  <div class="wrap">
+    <a class="home" href="/" aria-label="Rainr Audio home">
+      <Logo class="logo" label="Rainr Audio" />
+    </a>
+    <nav aria-label="Primary">
+      <a class="hide-xs" href="/#lab">In the lab</a>
+      <a class="hide-sm" href="/notes/">Notes</a>
+      <a class="hide-sm" href="/#about">About</a>
+      <a class="btn btn-primary" href="/#waitlist">Join waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--ink) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+  .home { display: block; color: var(--fg); }
+  .home :global(.logo) { display: block; height: 40px; width: auto; }
+  nav { display: flex; align-items: center; gap: clamp(14px, 3vw, 32px); font-family: var(--mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+  nav a { white-space: nowrap; }
+  nav a:not(.btn) { text-decoration: none; color: var(--silver); }
+  nav a:not(.btn):hover { color: var(--fg); }
+  nav .btn { padding: 9px 14px; }
+  @media (max-width: 680px) { .hide-sm { display: none; } }
+  @media (max-width: 520px) {
+    .hide-xs { display: none; }
+    .home :global(.logo) { height: 32px; }
+    nav { gap: 12px; font-size: .72rem; }
+    nav .btn { padding: 8px 10px; }
+  }
+</style>

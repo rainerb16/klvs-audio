@@ -1,0 +1,68 @@
+/* Rainr Audio: dark studio rack. Single dark look on purpose: the brand lives on black.
+   Red is for small accents only (the logo cursor, status lights, the waitlist rule). */
+:root {
+  --ink: #0a0a0b;          /* page */
+  --rack: #121214;         /* panels */
+  --rack-2: #19191c;       /* raised */
+  --line: #2a2a2e;         /* hairlines */
+  --silver: #c2c2c6;       /* "AUDIO" under the wordmark, main accent */
+  --fg: #ecebe9;           /* body text, wordmark */
+  --muted: #8d8c92;
+  --red: #e30613;
+  --red-glow: rgba(227, 6, 19, .12);
+
+  --display: "Archivo", "Arial Black", system-ui, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2rem, 4vw, 2.75rem);
+  --step-4: clamp(2.5rem, 6.4vw, 4.75rem);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ink); color: var(--fg); font-family: var(--body); font-size: var(--step-0); line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+img { max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { padding-block: clamp(64px, 9vw, 120px); }
+.band + .band { border-top: 1px solid var(--line); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+h1, h2, h3 { font-family: var(--display); font-stretch: 118%; font-weight: 800; line-height: 1.02; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-4); font-weight: 900; }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); }
+p { margin: 0; max-width: 62ch; }
+
+.eyebrow { font-family: var(--mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--silver); display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--red); }
+.lede { color: #c9c8cc; font-size: var(--step-1); line-height: 1.5; }
+.muted { color: var(--muted); }
+.section-head { display: grid; gap: 14px; margin-bottom: 40px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--mono); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; border-radius: 3px; padding: 12px 18px; min-height: 44px; border: 1px solid transparent; cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
+.btn-primary { background: var(--fg); color: var(--ink); }
+.btn-primary:hover { background: var(--silver); }
+.btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+.btn-ghost:hover { border-color: var(--silver); }
+
+.badge { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 5px 9px; border-radius: 3px; border: 1px solid var(--red); color: var(--red); white-space: nowrap; }
+.badge.dim { border-color: var(--line); color: var(--muted); }
+
+.led { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red); animation: blink 2.4s ease-in-out infinite; flex-shrink: 0; }
+@keyframes blink { 50% { opacity: .35; } }
+
+[data-tilt] { transform-style: preserve-3d; will-change: transform; }
