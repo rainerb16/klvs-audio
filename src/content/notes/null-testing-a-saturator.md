@@ -3,6 +3,7 @@ title: Null-testing a saturator
 summary: How I check that the WRM1 plugin sounds the same as the Python model it came from. Flip one against the other and measure what's left.
 tag: DSP
 date: 2026-10-24
+draft: false
 ---
 
 If you've mixed for long enough, you've done a null test. Flip the polarity of one file against another and play them together. Whatever you still hear is the difference between them. Silence means they match.

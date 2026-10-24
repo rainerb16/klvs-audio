@@ -3,6 +3,7 @@ title: Building my first Max for Live device
 summary: Arrangr was supposed to be a plugin. A few days of tests turned it into a Max for Live device that builds the arrangement inside Live.
 tag: Max for Live
 date: 2026-10-21
+draft: false
 ---
 
 I have a folder full of 8-bar loops that never became songs. Most producers I know have one too. Making the loop is fun. Stretching it into six minutes with an intro, a breakdown and a drop is where I lose steam.

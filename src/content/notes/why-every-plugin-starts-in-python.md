@@ -3,6 +3,7 @@ title: Why every plugin starts in Python
 summary: Before WRM1 had a line of C++, it was a Python model I could measure, render and listen to.
 tag: DSP
 date: 2026-10-22
+draft: false
 ---
 
 WRM1 is a saturator for the mix bus. It adds mostly second-harmonic colour, rolls off a little top end, can add some low-mid body, and rounds off peaks the way a signal does when it leans into a curve. I built all of it in Python before writing a line of C++.
