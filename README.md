@@ -49,6 +49,18 @@ order: 1
 
 Change `status` to move the progress bar. A new product is a new file.
 
+## Editing in the browser (Pages CMS)
+
+You can also write posts and update the lab cards without touching code:
+
+1. Go to [app.pagescms.org](https://app.pagescms.org) and sign in with GitHub.
+2. Open the `klvs-audio` repo and pick the branch (`main` once the site is live).
+3. **Lab notes**: new posts start as drafts. Turn **Draft** off to publish.
+4. **In the lab**: change **Progress** to move a card's progress bar.
+
+Each save is a commit, and Netlify rebuilds the site in about a minute. The editor is set up in `.pages.yml`.
+Images you add to a post are saved in `public/images/notes/`.
+
 ## Where things are
 
 | What | Where |

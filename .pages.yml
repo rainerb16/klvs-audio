@@ -1,0 +1,112 @@
+# Pages CMS (https://app.pagescms.org): edit lab notes and lab cards in the browser.
+# Every save is a commit to this repo, and Netlify rebuilds the site from it.
+# Field names here must match the schemas in src/content.config.ts.
+
+media:
+  input: public/images/notes
+  output: /images/notes
+  rename: safe
+  categories: [image]
+
+content:
+  - name: notes
+    label: Lab notes
+    type: collection
+    path: src/content/notes
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, date, tag, draft]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: summary
+        label: Summary
+        description: One or two sentences. Shown in the list and under the title.
+        type: text
+        required: true
+      - name: tag
+        label: Tag
+        type: select
+        required: true
+        options:
+          values: [DSP, Mixing, Max for Live, Plugins, Studio]
+      - name: date
+        label: Date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: draft
+        label: Draft
+        description: On = hidden on the live site. Turn off to publish.
+        type: boolean
+        default: true
+      - name: upcoming
+        label: Coming soon
+        description: On = listed as "Soon" with no page. Use for a post you've announced but not written.
+        type: boolean
+        default: false
+      - name: body
+        label: Post
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: lab
+    label: In the lab
+    type: collection
+    path: src/content/lab
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: name
+      fields: [name, type, status]
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: type
+        label: Type
+        type: select
+        required: true
+        options:
+          values:
+            - name: plugin
+              label: Plugin
+            - name: device
+              label: Max for Live device
+      - name: formats
+        label: Formats
+        description: e.g. "VST3 / AU" or "Max for Live · Ableton Live"
+        type: string
+        required: true
+      - name: status
+        label: Progress
+        description: "Plugins: prototype, build, testing, beta, release. Devices: idea, build, testing, beta, release. A stage that doesn't fit the type stops the site from building."
+        type: select
+        required: true
+        options:
+          values: [idea, prototype, build, testing, beta, release]
+      - name: blurb
+        label: Blurb
+        description: One or two plain sentences for the card.
+        type: text
+        required: true
+      - name: badge
+        label: Badge
+        type: string
+        default: Coming soon
+      - name: order
+        label: Order on the page
+        type: number
+        default: 0
