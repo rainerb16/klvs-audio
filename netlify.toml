@@ -5,6 +5,18 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# /admin opens the Pages CMS editor (see README). 302 so the target can change later.
+[[redirects]]
+  from = "/admin"
+  to = "https://app.pagescms.org/"
+  status = 302
+  force = true
+[[redirects]]
+  from = "/admin/*"
+  to = "https://app.pagescms.org/"
+  status = 302
+  force = true
+
 # Old KLVS Audio service pages: send visitors and search engines to the new site.
 [[redirects]]
   from = "/mixing"

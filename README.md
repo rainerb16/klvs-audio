@@ -53,7 +53,7 @@ Change `status` to move the progress bar. A new product is a new file.
 
 You can also write posts and update the lab cards without touching code:
 
-1. Go to [app.pagescms.org](https://app.pagescms.org) and sign in with GitHub.
+1. Go to `rainraudio.com/admin` (it forwards to [app.pagescms.org](https://app.pagescms.org)) and sign in with GitHub.
 2. Open the `klvs-audio` repo and pick the branch (`main` once the site is live).
 3. **Lab notes**: new posts start as drafts. Turn **Draft** off to publish.
 4. **In the lab**: change **Progress** to move a card's progress bar.
