@@ -1,0 +1,37 @@
+---
+import { hasPage, type Note } from "../notes";
+
+interface Props { notes: Note[] }
+const { notes } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+---
+{notes.length === 0 ? (
+  <p class="muted">First posts soon.</p>
+) : (
+  <ul class="notes">
+    {notes.map(n => (
+      <li data-reveal>
+        <span class="when">
+          {n.data.draft ? "Draft" : n.data.upcoming ? "Soon" : n.data.date ? <time datetime={n.data.date.toISOString()}>{fmt(n.data.date)}</time> : ""}
+        </span>
+        <div class="what">
+          <h3>{hasPage(n) ? <a href={`/notes/${n.id}/`}>{n.data.title}</a> : n.data.title}</h3>
+          <p class="muted">{n.data.summary}</p>
+        </div>
+        <span class="badge dim">{n.data.tag}</span>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .notes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  li { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding-block: 22px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 640px) { li { grid-template-columns: minmax(0, 1fr); } }
+  .when { font-family: var(--mono); font-size: .72rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  .what { display: grid; gap: 6px; min-width: 0; }
+  h3 { font-size: 1.25rem; font-stretch: 112%; }
+  h3 a { text-decoration: none; }
+  h3 a:hover { text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 4px; }
+  .badge { justify-self: start; }
+</style>

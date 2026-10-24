@@ -1,0 +1,54 @@
+---
+const words = ["Tools", "I", "wanted", "at", "the"];
+---
+<section class="hero">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="copy">
+      <span class="eyebrow">Rainr Audio · Coming soon</span>
+      <h1>
+        {words.map(w => <><span class="w">{w}</span> </>)}<em><span class="w">mix</span> <span class="w">desk.</span></em>
+      </h1>
+      <p class="lede">I make techno, I spent years mixing and mastering other people's records, and I write software. Now I'm building plugins and Max for Live devices for Ableton Live. The first two are in the works.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#lab">See what's in the lab</a>
+      </div>
+      <div class="status"><span class="led" aria-hidden="true"></span><span><slot name="status" /></span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // The 3D spectrum loads after first paint so it never delays the headline.
+  const canvas = document.getElementById("stage") as HTMLCanvasElement | null;
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const hasWebGL = () => {
+    try { return !!document.createElement("canvas").getContext("webgl2"); } catch { return false; }
+  };
+  const start = () => {
+    if (!canvas || !hero || !hasWebGL()) return;   // no WebGL: the red glow stays as the backdrop
+    import("../scripts/waterfall").then(m => m.startWaterfall(canvas, hero)).catch(() => {});
+  };
+  const whenIdle = () => ("requestIdleCallback" in window ? requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 600));
+  if (document.readyState === "complete") whenIdle();
+  else addEventListener("load", whenIdle, { once: true });
+</script>
+
+<style>
+  .hero { position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; width: 720px; height: 720px; right: -220px; top: -260px; background: radial-gradient(closest-side, var(--red-glow), transparent); pointer-events: none; }
+  #stage { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+  .shade { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(90deg, var(--ink) 0%, color-mix(in srgb, var(--ink) 80%, transparent) 32%, transparent 62%),
+                linear-gradient(180deg, var(--ink) 0%, transparent 22%, transparent 80%, var(--ink) 100%); }
+  @media (max-width: 900px) { .shade { background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 75%, transparent), color-mix(in srgb, var(--ink) 55%, transparent) 60%, var(--ink)); } }
+  .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 168px); }
+  .copy { display: grid; gap: 24px; max-width: 680px; min-width: 0; }
+  h1 em { font-style: normal; color: var(--silver); }
+  h1 .w { display: inline-block; }
+  .status { font-family: var(--mono); font-size: .78rem; color: var(--muted); display: flex; align-items: baseline; gap: 10px; }
+  .status span:last-child { min-width: 0; }
+  .status .led { align-self: center; }
+</style>

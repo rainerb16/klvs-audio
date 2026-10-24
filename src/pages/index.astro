@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import LabCard from "../components/LabCard.astro";
+import FreeDevice from "../components/FreeDevice.astro";
+import NoteList from "../components/NoteList.astro";
+import About from "../components/About.astro";
+import WaitlistForm from "../components/WaitlistForm.astro";
+import { listNotes } from "../notes";
+
+const lab = (await getCollection("lab")).sort((a, b) => a.data.order - b.data.order);
+const notes = (await listNotes()).slice(0, 3);
+
+const count = (type: "plugin" | "device") => lab.filter(l => l.data.type === type).length;
+const statusLine = [
+  count("plugin") && `${count("plugin")} plugin${count("plugin") > 1 ? "s" : ""} in progress`,
+  count("device") && `${count("device")} Max for Live device${count("device") > 1 ? "s" : ""} in progress`,
+].filter(Boolean).join(" · ");
+---
+<Base>
+  <Hero><Fragment slot="status">{statusLine}</Fragment></Hero>
+
+  <section class="band" id="lab">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">In the lab</span>
+        <h2>What I'm working on.</h2>
+        <p class="muted">Nothing's for sale yet. People on the waitlist hear first when something is.</p>
+      </div>
+      <div class="lab-grid">
+        {lab.map(item => <LabCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <FreeDevice />
+
+  <section class="band" id="notes">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Lab notes</span>
+        <h2>What I'm learning as I go.</h2>
+        <p class="muted">Short posts about building WRM1, Arrangr and whatever comes next.</p>
+      </div>
+      <NoteList notes={notes} />
+      <p class="all"><a href="/notes/">All lab notes →</a></p>
+    </div>
+  </section>
+
+  <About />
+  <WaitlistForm />
+</Base>
+
+<style>
+  .lab-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; perspective: 1000px; }
+  @media (max-width: 860px) { .lab-grid { grid-template-columns: minmax(0, 1fr); } }
+  .all { margin-top: 24px; font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+  .all a { color: var(--silver); text-decoration: none; }
+  .all a:hover { color: var(--fg); }
+</style>

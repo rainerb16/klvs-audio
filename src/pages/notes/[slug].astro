@@ -1,0 +1,45 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import WaitlistForm from "../../components/WaitlistForm.astro";
+import { listNotes, hasPage, type Note } from "../../notes";
+
+export async function getStaticPaths() {
+  const notes = (await listNotes()).filter(hasPage);
+  return notes.map(note => ({ params: { slug: note.id }, props: { note } }));
+}
+
+const { note } = Astro.props as { note: Note };
+const { Content } = await render(note);
+const date = note.data.date?.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+<Base title={note.data.title} description={note.data.summary}>
+  <article class="band">
+    <div class="wrap post">
+      <a class="back" href="/notes/">← Lab notes</a>
+      <header>
+        <span class="eyebrow">{note.data.tag}{date && <> · <time datetime={note.data.date?.toISOString()}>{date}</time></>}</span>
+        <h1>{note.data.title}</h1>
+        <p class="lede">{note.data.summary}</p>
+      </header>
+      <div class="prose"><Content /></div>
+    </div>
+  </article>
+  <WaitlistForm />
+</Base>
+
+<style>
+  .post { max-width: 760px; display: grid; gap: 32px; }
+  .back { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--silver); text-decoration: none; }
+  header { display: grid; gap: 18px; }
+  .prose { display: grid; gap: 1.1em; font-size: 1.06rem; line-height: 1.7; color: #d6d5d8; }
+  .prose :global(h2) { font-size: var(--step-2); margin-top: .8em; }
+  .prose :global(h3) { font-size: var(--step-1); margin-top: .6em; }
+  .prose :global(p), .prose :global(ul), .prose :global(ol) { margin: 0; max-width: 68ch; }
+  .prose :global(a) { color: var(--fg); text-decoration-color: var(--red); text-underline-offset: 3px; }
+  .prose :global(code) { font-family: var(--mono); font-size: .9em; background: var(--rack-2); padding: .1em .35em; border-radius: 3px; }
+  .prose :global(pre) { background: var(--rack); border: 1px solid var(--line); border-radius: 6px; padding: 16px; overflow-x: auto; font-size: .9rem; }
+  .prose :global(pre code) { background: none; padding: 0; }
+  .prose :global(img) { border-radius: 6px; border: 1px solid var(--line); }
+  .prose :global(blockquote) { margin: 0; padding-left: 18px; border-left: 2px solid var(--red); color: var(--silver); }
+</style>

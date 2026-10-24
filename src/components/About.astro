@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import studio from "../assets/studio.jpg";
+---
+<section class="band" id="about">
+  <div class="wrap about">
+    <div class="col" data-reveal>
+      <span class="eyebrow">About</span>
+      <h2>Producer, engineer, developer.</h2>
+      <figure class="photo">
+        <Image src={studio} alt="Mastering session in WaveLab: loudness meters on screen, a PreSonus fader controller, a KALI monitor and a 266XL compressor." widths={[480, 800, 1200]} sizes="(max-width: 860px) 100vw, 460px" />
+        <figcaption>The room I used to mix and master in.</figcaption>
+      </figure>
+    </div>
+    <div class="col" data-reveal>
+      <p class="lede">I started out making dark, hypnotic techno. After that I spent years mixing and mastering other artists' records as KLVS Audio. I'm also a software developer.</p>
+      <p class="muted">Rainr Audio puts the three together. I make the tools I kept wishing I had while mixing. Each one starts as a Python model that I test on real mixes before I build the real thing. If the measurements and my ears disagree, it doesn't ship.</p>
+      <dl class="roles">
+        <div><dt>Producer</dt><dd>Making dark, hypnotic techno.</dd></div>
+        <div><dt>Mix &amp; mastering engineer</dt><dd>Years of finishing other artists' records as KLVS Audio.</dd></div>
+        <div><dt>Software developer</dt><dd>Writing the code behind every Rainr plugin and device.</dd></div>
+      </dl>
+      <ol class="timeline">
+        <li><span class="yr">2017</span><span class="what">Producing and releasing techno</span></li>
+        <li><span class="yr">2018</span><span class="what">Mixing and mastering as KLVS Audio</span></li>
+        <li><span class="yr">2026</span><span class="what">Started Rainr Audio. First plugin in testing</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  @media (max-width: 860px) { .about { grid-template-columns: minmax(0, 1fr); } }
+  .col { display: grid; gap: 18px; min-width: 0; }
+  .photo { margin: 0; display: grid; gap: 10px; }
+  .photo :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 6px; border: 1px solid var(--line); }
+  figcaption { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+  .roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; margin: 0; }
+  @media (max-width: 520px) { .roles { grid-template-columns: minmax(0, 1fr); } }
+  .roles div { border-top: 1px solid var(--line); padding-top: 12px; display: grid; gap: 4px; }
+  dt { font-family: var(--display); font-weight: 800; font-stretch: 112%; font-size: 1.02rem; }
+  dd { margin: 0; color: var(--muted); font-size: .95rem; }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 16px; padding-block: 14px; border-top: 1px solid var(--line); }
+  .timeline li:last-child { border-bottom: 1px solid var(--line); }
+  .yr { font-family: var(--mono); font-size: .78rem; color: var(--silver); padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .timeline .what { color: #cfced2; }
+</style>

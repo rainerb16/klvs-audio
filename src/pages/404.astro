@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base title="Page not found" noindex>
+  <section class="band">
+    <div class="wrap missing">
+      <span class="eyebrow">404</span>
+      <h1>Nothing on this channel.</h1>
+      <p class="lede">This page doesn't exist. If you followed an old KLVS Audio link, the mixing and mastering pages are gone.</p>
+      <div class="cta-row"><a class="btn btn-primary" href="/">Go to the homepage</a></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .missing { display: grid; gap: 22px; max-width: 720px; min-height: 50vh; align-content: center; }
+</style>

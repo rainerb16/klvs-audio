@@ -1,0 +1,26 @@
+---
+import Logo from "./Logo.astro";
+import { SITE } from "../config";
+const year = new Date().getFullYear();
+---
+<footer class="site">
+  <div class="wrap">
+    <Logo class="logo" />
+    <nav class="links" aria-label="Contact">
+      {SITE.social.map(s => <a href={s.href} target="_blank" rel="noopener">{s.label}</a>)}
+      {SITE.email && <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>}
+    </nav>
+    <span class="copy">© {year} {SITE.name}</span>
+  </div>
+</footer>
+
+<style>
+  footer.site { padding-block: 40px; border-top: 1px solid var(--line); }
+  .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  footer :global(.logo) { display: block; height: 34px; width: auto; color: var(--fg); }
+  .links { display: flex; gap: 22px; flex-wrap: wrap; font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+  .links a { text-decoration: none; color: var(--silver); }
+  .links a:hover { color: var(--fg); }
+  .links .email { text-transform: none; letter-spacing: 0; }
+  .copy { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+</style>
