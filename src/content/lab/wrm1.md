@@ -3,6 +3,6 @@ name: WRM1
 type: plugin
 formats: VST3 / AU
 status: testing
-blurb: A mix-bus saturator for warmth without mud. Tape, Tube and Console characters, with Auto Gain so louder never fools your ears. Being tested on real mixes now.
+blurb: Saturation for the mix bus, with Tape, Tube and Console modes. It turns itself back down as you drive it, so you're comparing tone at the same level. Testing it on real mixes now.
 order: 1
 ---

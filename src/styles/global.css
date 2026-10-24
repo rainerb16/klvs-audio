@@ -9,11 +9,12 @@
   --fg: #ecebe9;           /* body text, wordmark */
   --muted: #8d8c92;
   --red: #e30613;
+  --red-text: #ff3341;      /* brighter red for small red text: 5:1 on panels, the logo red is only 3.8:1 */
   --red-glow: rgba(227, 6, 19, .12);
 
-  --display: "Archivo", "Arial Black", system-ui, sans-serif;
-  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --display: "Archivo Variable", "Arial Black", system-ui, sans-serif;
+  --body: "Instrument Sans Variable", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono Variable", ui-monospace, Consolas, monospace;
 
   --step-0: 1rem;
   --step-1: 1.25rem;
@@ -59,7 +60,7 @@ p { margin: 0; max-width: 62ch; }
 .btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
 .btn-ghost:hover { border-color: var(--silver); }
 
-.badge { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 5px 9px; border-radius: 3px; border: 1px solid var(--red); color: var(--red); white-space: nowrap; }
+.badge { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 5px 9px; border-radius: 3px; border: 1px solid var(--red); color: var(--red-text); white-space: nowrap; }
 .badge.dim { border-color: var(--line); color: var(--muted); }
 
 .led { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px var(--red); animation: blink 2.4s ease-in-out infinite; flex-shrink: 0; }

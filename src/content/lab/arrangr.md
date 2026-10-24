@@ -3,6 +3,6 @@ name: Arrangr
 type: device
 formats: Max for Live · Ableton Live
 status: build
-blurb: Turns a loop into a full house or techno arrangement, built right in your Live set, with a reason for every clip.
+blurb: Give it a loop and it builds a full house or techno arrangement in your Live set, with a note on each clip saying why it's there. Still building it.
 order: 2
 ---

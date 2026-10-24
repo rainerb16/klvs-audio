@@ -27,7 +27,8 @@ export function startWaterfall(canvas: HTMLCanvasElement, hero: HTMLElement) {
   const xOfFreq = (f: number) => 0.75 - Math.log10(f / 40) * 0.9;
 
   const silver = new Color(0x6e6e74), red = new Color(0xe30613), tmp = new Color();
-  const rows: { g: BufferGeometry; pos: Float32Array; col: Float32Array; mat: LineBasicMaterial }[] = [];
+  // Each row is one time slot. Its shape is computed once per slot; after that the row only moves back in z.
+  const rows: { g: BufferGeometry; line: Line; pos: Float32Array; col: Float32Array; mat: LineBasicMaterial; slot: number }[] = [];
   for (let j = 0; j < ROWS; j++) {
     const g = new BufferGeometry();
     const pos = new Float32Array(COLS * 3), col = new Float32Array(COLS * 3);
@@ -35,9 +36,11 @@ export function startWaterfall(canvas: HTMLCanvasElement, hero: HTMLElement) {
     g.setAttribute("position", new BufferAttribute(pos, 3));
     g.setAttribute("color", new BufferAttribute(col, 3));
     const mat = new LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.9 });
-    scene.add(new Line(g, mat));
-    rows.push({ g, pos, col, mat });
+    const line = new Line(g, mat);
+    scene.add(line);
+    rows.push({ g, line, pos, col, mat, slot: NaN });
   }
+  const slotCache = new Map<number, { y: Float32Array; col: Float32Array }>();
 
   // Oscilloscope trace on the horizon: the current note's waveform, gently soft-clipped.
   const WAVE_N = 500;
@@ -80,24 +83,39 @@ export function startWaterfall(canvas: HTMLCanvasElement, hero: HTMLElement) {
   });
 
   const amp = 1.8 + WARMTH * 2.4;
+  const slotData = (slot: number) => {
+    let d = slotCache.get(slot);
+    if (!d) {
+      spectrum(slot * ROW_DT);
+      d = { y: new Float32Array(COLS), col: new Float32Array(COLS * 3) };
+      for (let i = 0; i < COLS; i++) {
+        const h = buf[i];
+        d.y[i] = h * amp;
+        tmp.copy(silver).lerp(red, Math.min(1, Math.max(0, (h - 0.35) * 2.2)));
+        d.col[i * 3] = tmp.r; d.col[i * 3 + 1] = tmp.g; d.col[i * 3 + 2] = tmp.b;
+      }
+      slotCache.set(slot, d);
+    }
+    return d;
+  };
   const frame = (t: number) => {
     const song = 100 + (t / 1000) * SONG_RATE;            // offset keeps every row's time positive
     const base = Math.floor(song / ROW_DT), frac = song / ROW_DT - base;
     for (let j = 0; j < ROWS; j++) {
       const r = rows[j], age = ROWS - 1 - j;              // j = ROWS - 1 is the newest row
-      spectrum((base - age) * ROW_DT);
-      const z = Z1 - (age + frac) * SPACING;
-      r.mat.opacity = j === ROWS - 1 ? 0.9 * frac : 0.9;
-      for (let i = 0; i < COLS; i++) {
-        const h = buf[i];
-        r.pos[i * 3 + 1] = h * amp;
-        r.pos[i * 3 + 2] = z;
-        tmp.copy(silver).lerp(red, Math.min(1, Math.max(0, (h - 0.35) * 2.2)));
-        r.col[i * 3] = tmp.r; r.col[i * 3 + 1] = tmp.g; r.col[i * 3 + 2] = tmp.b;
+      const slot = base - age;
+      if (r.slot !== slot) {
+        const d = slotData(slot);
+        for (let i = 0; i < COLS; i++) r.pos[i * 3 + 1] = d.y[i];
+        r.col.set(d.col);
+        r.g.attributes.position.needsUpdate = true;
+        r.g.attributes.color.needsUpdate = true;
+        r.slot = slot;
       }
-      r.g.attributes.position.needsUpdate = true;
-      r.g.attributes.color.needsUpdate = true;
+      r.line.position.z = Z1 - (age + frac) * SPACING;
+      r.mat.opacity = j === ROWS - 1 ? 0.9 * frac : 0.9;
     }
+    for (const k of slotCache.keys()) if (k < base - ROWS) slotCache.delete(k);
     const { f0, p } = noteAt(song);
     const env = Math.exp(-p * 1.6) * 0.85 + 0.15, cycles = (9 * f0) / F0, drift = (t / 1000) * 0.25;
     for (let i = 0; i < WAVE_N; i++) {

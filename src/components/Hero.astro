@@ -31,8 +31,9 @@ const words = ["Tools", "I", "wanted", "at", "the"];
     if (!canvas || !hero || !hasWebGL()) return;   // no WebGL: the red glow stays as the backdrop
     import("../scripts/waterfall").then(m => m.startWaterfall(canvas, hero)).catch(() => {});
   };
-  if ("requestIdleCallback" in window) requestIdleCallback(start, { timeout: 1500 });
-  else setTimeout(start, 300);
+  const whenIdle = () => ("requestIdleCallback" in window ? requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 600));
+  if (document.readyState === "complete") whenIdle();
+  else addEventListener("load", whenIdle, { once: true });
 </script>
 
 <style>
