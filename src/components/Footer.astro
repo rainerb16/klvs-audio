@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
     <Logo class="logo" />
     <nav class="links" aria-label="Contact">
       {SITE.social.map(s => <a href={s.href} target="_blank" rel="noopener">{s.label}</a>)}
-      <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      {SITE.email && <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>}
     </nav>
     <span class="copy">© {year} {SITE.name}</span>
   </div>

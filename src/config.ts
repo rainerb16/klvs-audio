@@ -1,8 +1,8 @@
 // One place for the brand details, so a rename or a new link is a single edit.
 export const SITE = {
   name: "Rainr Audio",
-  url: "https://rainraudio.com",
-  email: "hello@rainraudio.com",
+  // Shown in the footer. Leave empty to hide it (e.g. until the rainraudio.com mailbox exists).
+  email: "",
   description:
     "Audio plugins and Max for Live devices for Ableton Live, built by a techno producer, mix and mastering engineer and software developer.",
   // Add links here once the accounts exist, e.g. { label: "Instagram", href: "https://www.instagram.com/rainraudio" }

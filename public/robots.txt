@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://rainraudio.com/sitemap-index.xml
